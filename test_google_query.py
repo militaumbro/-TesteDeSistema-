@@ -22,7 +22,13 @@ class SmokeTest(unittest.TestCase):
         time.sleep(3)
 
         self.assertIn("software testing", self.driver.title)
-        # todo: assert 1
-        # todo: assert 2
-        # todo: assert 3
+        self.assertIn("https://www.google.com/search?q=software+testing", self.driver.current_url)
+        self.driver.get("http://bing.com")
+        time.sleep(3)
+        self.assertIn("https://www.bing.com", self.driver.current_url)
+        element = self.driver.find_element_by_name("q")
+        element.send_keys("hardware")
+        element.submit()
+        time.sleep(3)
+        self.assertIn("hardware", self.driver.title)
         
